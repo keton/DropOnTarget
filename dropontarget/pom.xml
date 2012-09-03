@@ -21,27 +21,27 @@
     <profile>
       <id>java</id>
       <activation><activeByDefault>true</activeByDefault></activation>
-      <modules><module>java</module></modules>
+      <modules><module>${project.artifactId}-java</module></modules>
     </profile>
     <profile>
       <id>android</id>
-      <modules><module>android</module></modules>
+      <modules><module>${project.artifactId}-android</module></modules>
     </profile>
     <profile>
       <id>ios</id>
-      <modules><module>ios</module></modules>
+      <modules><module>${project.artifactId}-ios</module></modules>
     </profile>
     <profile>
       <id>html</id>
-      <modules><module>html</module></modules>
+      <modules><module>${project.artifactId}-html</module></modules>
     </profile>
     <profile>
       <id>flash</id>
-      <modules><module>flash</module></modules>
+      <modules><module>${project.artifactId}-flash</module></modules>
     </profile>
   </profiles>
 
   <modules>
-    <module>core</module>
+    <module>${project.artifactId}-core</module>
   </modules>
 </project>
