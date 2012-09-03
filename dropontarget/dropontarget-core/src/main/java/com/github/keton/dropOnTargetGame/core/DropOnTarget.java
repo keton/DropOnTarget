@@ -11,29 +11,64 @@ import playn.core.Game;
 import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
+import playn.core.PlayN;
 import playn.core.ResourceCallback;
 
 public class DropOnTarget implements Game {
 	
-	public static GroupLayer frontLayer=graphics().createGroupLayer();
-	public static GroupLayer backLayer=graphics().createGroupLayer();
+	public static GroupLayer frontLayer;
+	public static GroupLayer backLayer;
 	
 	public static boolean isDragging=false;
+	public static float scale=1;
 	
   @SuppressWarnings({ "rawtypes", "unchecked" })
 @Override
   public void init() {
     // create and add background image layer
-    final Image bgImage = assets().getImage("images/beach.png");
+	  
+	  frontLayer=graphics().createGroupLayer();
+	  backLayer=graphics().createGroupLayer();
+	  
+	final Image bgImage = assets().getImage("images/beach.png");
    
-    
     bgImage.addCallback(new ResourceCallback(){
 
 		@Override
 		public void done(Object resource) {
 			// TODO Auto-generated method stub
+			if (graphics().screenWidth()>=bgImage.width()||graphics().screenHeight()>=bgImage.height())
+			{
 			graphics().setSize((int)bgImage.width(), (int)bgImage.height());
-			 ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+			log().debug("Big screen platform");
+			}
+			else 
+			{
+				log().debug("Scaled screen platform");
+				
+				int screenWidth=graphics().screenWidth();
+				int screenHeight=graphics().screenHeight();
+				
+				//int screenWidth=600;
+				//int screenHeight=400;
+				
+				graphics().setSize(
+						  screenWidth,
+						  screenHeight
+						);
+				// Keep the same aspect ratio.
+				float sx = (float)screenWidth / bgImage.width();
+				float sy = (float)screenHeight / bgImage.height();
+
+				// Fit to the available screen without stretching.
+				graphics().rootLayer().setScale(Math.min(sx, sy));
+				DropOnTarget.scale=Math.min(sx, sy);
+				log().debug("Scale is: "+scale);
+			}
+			
+			ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+			
+			
 			    graphics().rootLayer().add(bgLayer);
 			    
 			    graphics().rootLayer().add(backLayer);

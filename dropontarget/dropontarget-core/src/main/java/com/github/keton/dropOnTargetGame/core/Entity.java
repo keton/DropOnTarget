@@ -30,7 +30,9 @@ public class Entity {
 			Point p=Layer.Util.layerToScreen(entityLayer, event.localX(), event.localY());
 	 		p.x-=mouseDownPoint.x();
 	 		p.y-=mouseDownPoint.y();
-	 		
+	 		p.x/=DropOnTarget.scale;
+			p.y/=DropOnTarget.scale;
+			
 	 		Rectangle checkRect=new Rectangle(p.x(),p.y(),entityRect.width(),entityRect.height());
 	 		if (dropRect.intersects(checkRect))
 	 		{
@@ -47,7 +49,9 @@ public class Entity {
 			Point p=Layer.Util.layerToScreen(entityLayer, event.localX(), event.localY());
 	 		p.x-=mouseDownPoint.x();
 	 		p.y-=mouseDownPoint.y();
-	 		
+			p.x/=DropOnTarget.scale;
+			p.y/=DropOnTarget.scale;
+	 		//log().debug("MM lX:"+event.localX()+" px: "+p.x());
 	 		Rectangle checkRect=new Rectangle(p.x(),p.y(),entityRect.width(),entityRect.height());
 	 		if (dropRect.intersects(checkRect))
 	 		{
@@ -101,7 +105,9 @@ public class Entity {
 			Point p=Layer.Util.layerToScreen(entityLayer, touch.localX(), touch.localY());
 	 		p.x-=mouseDownPoint.x();
 	 		p.y-=mouseDownPoint.y();
-	 		
+	 		p.x/=DropOnTarget.scale;
+			p.y/=DropOnTarget.scale;
+			
 	 		Rectangle checkRect=new Rectangle(p.x(),p.y(),entityRect.width(),entityRect.height());
 	 		if (dropRect.intersects(checkRect))
 	 		{
@@ -117,6 +123,8 @@ public class Entity {
 			Point p=Layer.Util.layerToScreen(entityLayer, touch.localX(), touch.localY());
 	 		p.x-=mouseDownPoint.x();
 	 		p.y-=mouseDownPoint.y();
+	 		p.x/=DropOnTarget.scale;
+			p.y/=DropOnTarget.scale;
 	 		
 	 		Rectangle checkRect=new Rectangle(p.x(),p.y(),entityRect.width(),entityRect.height());
 	 		if (dropRect.intersects(checkRect))
